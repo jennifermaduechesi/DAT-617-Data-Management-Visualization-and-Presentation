@@ -93,6 +93,16 @@ for el in C.DOC:
         for i,w in enumerate(el["widths"]):
             for row in t.rows: row.cells[i].width=Inches(w)
         doc.add_paragraph().paragraph_format.space_after=Pt(4)
+    elif k == "annot":
+        p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.paragraph_format.space_after = Pt(8)
+        p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.ONE_POINT_FIVE
+        p.paragraph_format.left_indent = Inches(0.3)
+        p.paragraph_format.first_line_indent = Inches(-0.3)
+        r1 = p.add_run(C.clean(el["label"]) + " "); sr(r1, 11, bold=True)
+        r2 = p.add_run("“" + C.clean(el["quote"]) + "” "); sr(r2, 11)
+        r3 = p.add_run("(" + C.clean(el["prov"]) + ")"); sr(r3, 10, italic=True)
     elif k == "refs":
         for ref in el["items"]:
             p = doc.add_paragraph(); p.alignment=WD_ALIGN_PARAGRAPH.LEFT

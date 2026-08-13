@@ -91,6 +91,13 @@ for el in C.DOC:
             ("TOPPADDING",(0,0),(-1,-1),4),("BOTTOMPADDING",(0,0),(-1,-1),4),
         ]))
         story.append(t); story.append(Spacer(1,8))
+    elif k == "annot":
+        annot = ParagraphStyle("annot", fontName="TNR", fontSize=11, leading=16,
+                               alignment=TA_JUSTIFY, spaceAfter=8,
+                               leftIndent=0.3*inch, firstLineIndent=-0.3*inch)
+        html = (f'<b>{esc(el["label"])}</b> &#8220;{esc(el["quote"])}&#8221; '
+                f'<i>({esc(el["prov"])})</i>')
+        story.append(Paragraph(html, annot))
     elif k == "refs":
         for r in el["items"]:
             story.append(Paragraph(esc(r), ref))
