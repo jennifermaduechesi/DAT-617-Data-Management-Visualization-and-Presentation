@@ -61,6 +61,16 @@ for el in C.DOC:
         p.paragraph_format.keep_with_next = True
     elif k == "p":
         P(el["t"], size=el.get("size",12), indent=(0.3 if el.get("indent") else None))
+    elif k == "prompt5":
+        for lab, txt in el["items"]:
+            p = doc.add_paragraph()
+            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+            p.paragraph_format.space_after = Pt(2)
+            p.paragraph_format.line_spacing_rule = WD_LINE_SPACING.ONE_POINT_FIVE
+            p.paragraph_format.left_indent = Inches(0.5)
+            p.paragraph_format.first_line_indent = Inches(-0.3)
+            r1 = p.add_run(C.clean(lab) + ": "); sr(r1, 12, bold=True)
+            r2 = p.add_run(C.clean(txt)); sr(r2, 12)
     elif k == "pagebreak":
         doc.add_page_break()
     elif k == "fig":

@@ -64,6 +64,12 @@ for el in C.DOC:
     elif k == "p":
         stl = body_sm_ind if el.get("indent") else (body_sm if el.get("size")==11 else body)
         story.append(Paragraph(esc(el["t"]), stl))
+    elif k == "prompt5":
+        p5 = ParagraphStyle("p5", fontName="TNR", fontSize=12, leading=LEAD,
+                            alignment=TA_JUSTIFY, spaceAfter=2,
+                            leftIndent=0.5*inch, firstLineIndent=-0.3*inch)
+        for lab, txt in el["items"]:
+            story.append(Paragraph(f'<b>{esc(lab)}:</b> {esc(txt)}', p5))
     elif k == "pagebreak":
         story.append(PageBreak())
     elif k == "fig":
